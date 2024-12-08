@@ -44,7 +44,7 @@ module tt_um_monobit (
     // Instantiate the monobit module
     monobit monobit_inst (
         .clk(clk),
-        .rst(rst),
+        .rst(rst_n),
         .is_random_rsc_dat(is_random_rsc_dat),
         .is_random_triosy_lz(is_random_triosy_lz),
         .valid_rsc_dat(valid_rsc_dat),
