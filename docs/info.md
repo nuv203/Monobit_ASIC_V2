@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-It's a Koggee stone adder
+Monobit Design Testing from HLS.
 
 ## How to test
 
@@ -17,4 +17,4 @@ I used test.py
 
 ## External hardware
 
-no external hardware
+no external hardware is used.
