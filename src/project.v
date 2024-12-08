@@ -1,10 +1,6 @@
-/*
- * Copyright (c) 2024 Luca Collini
- * SPDX-License-Identifier: Apache-2.0
- */
-
 `define default_netname none
 
+//TinyTapeout Module Definition
 module tt_um_monobit (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -88,9 +84,6 @@ module ccs_out_v1 (dat, idat);
 
 endmodule
 
-
-
-
 //------> /eda/mentor/Siemens_EDA/Catapult_Synthesis_2023.1_2/Mgc_home/pkgs/siflibs/ccs_in_v1.v 
 //------------------------------------------------------------------------------
 // Catapult Synthesis - Sample I/O Port Library
@@ -108,8 +101,6 @@ endmodule
 // complete implementation of the named protocol or standard.
 //
 //------------------------------------------------------------------------------
-
-
 module ccs_in_v1 (idat, dat);
 
   parameter integer rscid = 1;
@@ -123,7 +114,6 @@ module ccs_in_v1 (idat, dat);
   assign idat = dat;
 
 endmodule
-
 
 //------> /eda/mentor/Siemens_EDA/Catapult_Synthesis_2023.1_2/Mgc_home/pkgs/siflibs/mgc_io_sync_v2.v 
 //------------------------------------------------------------------------------
@@ -142,8 +132,6 @@ endmodule
 // complete implementation of the named protocol or standard.
 //
 //------------------------------------------------------------------------------
-
-
 module mgc_io_sync_v2 (ld, lz);
     parameter valid = 0;
 
@@ -155,7 +143,6 @@ module mgc_io_sync_v2 (ld, lz);
     assign lz = ld;
 
 endmodule
-
 
 //------> /eda/mentor/Siemens_EDA/Catapult_Synthesis_2023.1_2/Mgc_home/pkgs/siflibs/mgc_shift_bl_beh_v5.v 
 module mgc_shift_bl_v5(a,s,z);
@@ -549,19 +536,15 @@ endmodule
 
 
 module monobit (
-  clk, rst_n, is_random_rsc_dat, is_random_triosy_lz, valid_rsc_dat, valid_triosy_lz,
-      epsilon_rsc_dat, epsilon_triosy_lz
+    input clk,
+  input rst_n,
+  output is_random_rsc_dat,
+  output is_random_triosy_lz,
+  output valid_rsc_dat,
+  output valid_triosy_lz,
+  input epsilon_rsc_dat,
+  output epsilon_triosy_lz
 );
-  input clk;
-  input rst_n;
-  output is_random_rsc_dat;
-  output is_random_triosy_lz;
-  output valid_rsc_dat;
-  output valid_triosy_lz;
-  input epsilon_rsc_dat;
-  output epsilon_triosy_lz;
-
-
 
   // Interconnect Declarations for Component Instantiations 
   monobit_core monobit_core_inst (
