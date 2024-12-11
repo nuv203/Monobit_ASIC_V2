@@ -24,9 +24,9 @@ async def tt_um_monobit (dut):
     dut.rst_n.value = 1
 
     dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 5)  # Assert reset
+    await Timer(50, units='ns')
     dut.rst_n.value = 1
-    await ClockCycles(dut.clk, 5)  # De-assert reset
+    await Timer(50, units='ns')
 
     # Test each state transition and output logic
     for epsilon_value in [0, 255]:  # Test for both epsilon values
