@@ -73,7 +73,7 @@ async def tt_um_monobit (dut):
     # Loop similar to the N_TESTS loop in the C++ testbench
     N_TESTS = 65536  # Same as in the C++ code
     
-    i = 85
+    i = 170
     # Recreate the C++ logic for `rnd`
     rnd = 0 if i <= 3 else i % 2  # This follows the C++ logic for `ac_int<1,false> rnd = i>3 ? i%2 :0;`
     
