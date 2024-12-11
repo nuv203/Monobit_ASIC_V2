@@ -36,22 +36,22 @@ async def tt_um_monobit (dut):
         def __init__(self):
             self.sum = 0
             self.bit_count = 0
-            self.is_random = False
-            self.valid = False
+            self.is_random = 0
+            self.valid = 0
     
         def process_bit(self, epsilon):
             # Update sum based on epsilon: +1 if true, -1 if false
             self.sum += 1 if epsilon else -1
     
             # Reset valid and is_random each cycle
-            self.is_random = False
-            self.valid = False
+            self.is_random = 0
+            self.valid = 0
     
             # Check if the bit count has reached 127 (since counting starts from 0, 127 means 128 bits)
             if self.bit_count == 127:
                 # Determine if the sum is within the boundary range
                 self.is_random = -BOUNDRY <= self.sum <= BOUNDRY
-                self.valid = True
+                self.valid = 1
                 self.sum = 0  # Reset sum after processing a batch of 128 bits
     
             # Increment the bit count, and wrap it around if it reaches 128
@@ -81,7 +81,7 @@ async def tt_um_monobit (dut):
         monobit_processor.process_bit(rnd)  # Process the rnd bit with Monobit logic
         
         # Wait for a clock cycle (replicates the clock edge-based system in the C++)
-        await RisingEdge(dut.clk)
+        await Timer(50, units='ns')
     
     # Retrieve and print the status after processing all bits
     status = monobit_processor.get_status()
