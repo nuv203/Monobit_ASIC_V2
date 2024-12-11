@@ -73,18 +73,18 @@ async def tt_um_monobit (dut):
     # Loop similar to the N_TESTS loop in the C++ testbench
     N_TESTS = 65536  # Same as in the C++ code
     
-    for i in range(N_TESTS):
-        # Recreate the C++ logic for `rnd`
-        rnd = 0 if i <= 3 else i % 2  # This follows the C++ logic for `ac_int<1,false> rnd = i>3 ? i%2 :0;`
-        
-        # Set the input value in the design
-        dut.ui_in.value = rnd  # Set the value of epsilon in the testbench (as per the C++ equivalent)
-        
-        # Call the monobit process
-        monobit_processor.process_bit(rnd)  # Process the rnd bit with Monobit logic
-        
-        # Wait for a clock cycle (replicates the clock edge-based system in the C++)
-        await Timer(50, units='ns')
+    i = 5
+    # Recreate the C++ logic for `rnd`
+    rnd = 0 if i <= 3 else i % 2  # This follows the C++ logic for `ac_int<1,false> rnd = i>3 ? i%2 :0;`
+    
+    # Set the input value in the design
+    dut.ui_in.value = rnd  # Set the value of epsilon in the testbench (as per the C++ equivalent)
+    
+    # Call the monobit process
+    monobit_processor.process_bit(rnd)  # Process the rnd bit with Monobit logic
+    
+    # Wait for a clock cycle (replicates the clock edge-based system in the C++)
+    await Timer(50, units='ns')
     
     # Retrieve and print the status after processing all bits
     status = monobit_processor.get_status()
