@@ -78,6 +78,7 @@ async def tt_um_monobit (dut):
     valid_expected = status['valid']
 
     # Check the values
+    await Timer(50, units='ns')
     assert dut.uo_out.value[0] == is_random_expected, f"Expected is_random={is_random_expected}, Got {dut.uo_out.value[0]}"
     assert dut.uo_out.value[1] == valid_expected, f"Expected valid={valid_expected}, Got {dut.uo_out.value[1]}"
 
