@@ -6,7 +6,6 @@ from cocotb.triggers import RisingEdge, Timer
 from cocotb.clock import Clock
 
 @cocotb.test()
-
 async def tt_um_monobit (dut):
 
     cocotb.start_soon(Clock(dut.clk, 10, units='ns').start())
@@ -20,7 +19,7 @@ async def tt_um_monobit (dut):
     dut.ena.value = 1
     dut.rst_n.value = 0
 
-    await Timer(50, units = 'ns')
+    await Timer(50, units='ns')
     dut.rst_n.value = 1
 
     dut.rst_n.value = 0
@@ -29,17 +28,6 @@ async def tt_um_monobit (dut):
     await Timer(50, units='ns')
 
     # Test each state transition and output logic
-    epsilon_value = 5
-    # for epsilon_value in epsilon_values:  # Test for both epsilon values
-    
-    dut.ui_in.value = epsilon_value
-
-        # Wait for a positive edge on the clock
-    await Timer(50, units='ns')
-    
-    # Read outputs and validate expected behavior
-
-    # Constants as defined in C++
     FREQ = 256
     BOUNDRY = 29  # Boundary adjusted for integer sum
     TARGET_BITS = 128
@@ -78,19 +66,33 @@ async def tt_um_monobit (dut):
             }
 
     monobit_processor = Monobit()
+
+    # Loop similar to the N_TESTS loop in the C++ testbench
+    N_TESTS = 65536  # Same as in the C++ code
+    
+    for i in range(N_TESTS):
+        # Recreate the C++ logic for `rnd`
+        rnd = 0 if i <= 3 else i % 2  # This follows the C++ logic for `ac_int<1,false> rnd = i>3 ? i%2 :0;`
         
-    monobit_processor.process_bit(epsilon_value % 2)  # Alternating pattern of 1s and 0s
+        # Set the input value in the design
+        dut.ui_in.value = rnd  # Set the value of epsilon in the testbench (as per the C++ equivalent)
         
-        # Retrieve and print the status after some processing
+        # Call the monobit process
+        monobit_processor.process_bit(rnd)  # Process the rnd bit with Monobit logic
+        
+        # Wait for a clock cycle (replicates the clock edge-based system in the C++)
+        await RisingEdge(dut.clk)
+    
+    # Retrieve and print the status after processing all bits
     status = monobit_processor.get_status()
     print(f"Is Random: {status['is_random']}, Valid: {status['valid']}, Sum: {status['sum']}, Bit Count: {status['bit_count']}")
 
-    is_random_expected = status['is_random'] # Expected output, set as per your design needs
-    valid_expected = status['valid'] # Expected output, set as per your design needs
-    assert dut.uo_out.value[0] == is_random_expected
-    assert dut.uo_out.value[1] == valid_expected
+    is_random_expected = status['is_random']  # Expected output, set as per your design needs
+    valid_expected = status['valid']  # Expected output, set as per your design needs
 
-        # Print output state for debugging
-    dut._log.info(f"Epsilon: {epsilon_value}, Is_Random: {dut.uo_out.value[0]}, Valid: {dut.uo_out.value[1]}")
+    # Check if the values from the DUT match the expected values
+    assert dut.uo_out.value[0] == is_random_expected, f"Mismatch: Expected is_random {is_random_expected}, Got {dut.uo_out.value[0]}"
+    assert dut.uo_out.value[1] == valid_expected, f"Mismatch: Expected valid {valid_expected}, Got {dut.uo_out.value[1]}"
 
-        # Add further checks as needed for complete coverage
+    # Print output state for debugging
+    dut._log.info(f"Is_Random: {dut.uo_out.value[0]}, Valid: {dut.uo_out.value[1]}")
