@@ -2,16 +2,26 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import cocotb
+from cocotb.triggers import RisingEdge, Timer
 from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles
-
 
 @cocotb.test()
+
 async def tt_um_monobit (dut):
-    dut._log.info("Start")
 
     cocotb.start_soon(Clock(dut.clk, 10, units='ns').start())
 
+    encryption_key = 0xAB
+
+    cocotb.start_soon(Clock(dut.clk, 10, units='ns').start())
+    # Initialize Inputs
+    dut.ui_in.value = 0
+    dut.uio_in.value = 0
+    dut.ena.value = 1
+    dut.rst_n.value = 0
+
+    await Timer(50, units = 'ns')
+    dut.rst_n.value = 1
 
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 5)  # Assert reset
