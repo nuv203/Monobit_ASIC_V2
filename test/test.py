@@ -50,7 +50,10 @@ async def tt_um_monobit (dut):
             # Check if the bit count has reached 127 (since counting starts from 0, 127 means 128 bits)
             if self.bit_count == 127:
                 # Determine if the sum is within the boundary range
-                self.is_random = -BOUNDRY <= self.sum <= BOUNDRY
+                if -BOUNDRY <= self.sum <= BOUNDRY:
+                    self.is_random = 1
+                else:
+                    self.is_random = 0
                 self.valid = 1
                 self.sum = 0  # Reset sum after processing a batch of 128 bits
     
