@@ -75,6 +75,7 @@ async def tt_um_monobit (dut):
                     "bit_count": self.bit_count
                 }
 
+        monobit_processor = Monobit()
         
         monobit_processor.process_bit(espilon_value % 2)  # Alternating pattern of 1s and 0s
         
