@@ -29,11 +29,12 @@ async def tt_um_monobit (dut):
     await Timer(50, units='ns')
 
     # Test each state transition and output logic
-    for epsilon_value in range(255):  # Test for both epsilon values
+    epsilon_values = [i for i in range(255)]
+    for epsilon_value in epsilon_values:  # Test for both epsilon values
         dut.ui_in.value = epsilon_value
 
         # Wait for a positive edge on the clock
-        await RisingEdge(dut.clk)
+        await Timer(50, units='ns')
         
         # Read outputs and validate expected behavior
 
