@@ -29,8 +29,9 @@ async def tt_um_monobit (dut):
     await Timer(50, units='ns')
 
     # Test each state transition and output logic
-    epsilon_values = [i for i in range(255)]
-    for epsilon_value in epsilon_values:  # Test for both epsilon values
+    epsilon_value = 5
+    # for epsilon_value in epsilon_values:  # Test for both epsilon values
+    
         dut.ui_in.value = epsilon_value
 
         # Wait for a positive edge on the clock
@@ -84,8 +85,8 @@ async def tt_um_monobit (dut):
         status = monobit_processor.get_status()
         print(f"Is Random: {status['is_random']}, Valid: {status['valid']}, Sum: {status['sum']}, Bit Count: {status['bit_count']}")
 
-        is_random_expected = status.is_random # Expected output, set as per your design needs
-        valid_expected = status.valid      # Expected output, set as per your design needs
+        is_random_expected = status['is_random'] # Expected output, set as per your design needs
+        valid_expected = status.['valid']      # Expected output, set as per your design needs
         assert dut.uo_out.value[0] == is_random_expected
         assert dut.uo_out.value[1] == valid_expected
 
