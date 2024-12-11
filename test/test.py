@@ -85,8 +85,8 @@ async def tt_um_monobit (dut):
 
         is_random_expected = status['is_random'] # Expected output, set as per your design needs
         valid_expected = status['valid']      # Expected output, set as per your design needs
-        assert dut.is_random_rsc_dat.value == is_random_expected
-        assert dut.valid_rsc_dat.value == valid_expected
+        assert dut.uo_out.value[0] == is_random_expected
+        assert dut.uo_out.value[1] == valid_expected
 
         # Print output state for debugging
         dut._log.info(f"Epsilon: {epsilon_value}, Is_Random: {dut.is_random_rsc_dat.value}, Valid: {dut.valid_rsc_dat.value}")
