@@ -122,15 +122,15 @@ async def test_monobit(dut):
 
         # Apply the sequence as an array
         for bit in sequence:
-            dut.epsilon_rsc_dat <= bit
+            dut.ui_in.value <= bit
             await RisingEdge(dut.clk)
 
         # Wait for the result to be valid
         await ClockCycles(dut.clk, 1)
 
         # Capture outputs
-        is_random = int(dut.is_random_rsc_dat.value)
-        valid = int(dut.valid_rsc_dat.value)
+        is_random = int(dut.uo_out.value[0])
+        valid = int(dut.uo_out.value[1])
 
         # Validate outputs
         assert valid == 1, f"Sequence {idx + 1}: Valid signal was not asserted."
