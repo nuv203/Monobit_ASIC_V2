@@ -32,50 +32,50 @@ async def tt_um_monobit (dut):
     epsilon_value = 5
     # for epsilon_value in epsilon_values:  # Test for both epsilon values
     
-        dut.ui_in.value = epsilon_value
+    dut.ui_in.value = epsilon_value
 
         # Wait for a positive edge on the clock
-        await Timer(50, units='ns')
-        
-        # Read outputs and validate expected behavior
+    await Timer(50, units='ns')
+    
+    # Read outputs and validate expected behavior
 
-        # Constants as defined in C++
-        FREQ = 256
-        BOUNDRY = 29  # Boundary adjusted for integer sum
-        TARGET_BITS = 128
+    # Constants as defined in C++
+    FREQ = 256
+    BOUNDRY = 29  # Boundary adjusted for integer sum
+    TARGET_BITS = 128
         
-        class Monobit:
-            def __init__(self):
-                self.sum = 0
-                self.bit_count = 0
-                self.is_random = False
-                self.valid = False
-        
-            def process_bit(self, epsilon):
-                # Update sum based on epsilon: +1 if true, -1 if false
-                self.sum += 1 if epsilon else -1
-        
-                # Reset valid and is_random each cycle
-                self.is_random = False
-                self.valid = False
-        
-                # Check if the bit count has reached 127 (since counting starts from 0, 127 means 128 bits)
-                if self.bit_count == 127:
-                    # Determine if the sum is within the boundary range
-                    self.is_random = -BOUNDRY <= self.sum <= BOUNDRY
-                    self.valid = True
-                    self.sum = 0  # Reset sum after processing a batch of 128 bits
-        
-                # Increment the bit count, and wrap it around if it reaches 128
-                self.bit_count = (self.bit_count + 1) % TARGET_BITS
-        
-            def get_status(self):
-                return {
-                    "is_random": self.is_random,
-                    "valid": self.valid,
-                    "sum": self.sum,
-                    "bit_count": self.bit_count
-                }
+    class Monobit:
+        def __init__(self):
+            self.sum = 0
+            self.bit_count = 0
+            self.is_random = False
+            self.valid = False
+    
+        def process_bit(self, epsilon):
+            # Update sum based on epsilon: +1 if true, -1 if false
+            self.sum += 1 if epsilon else -1
+    
+            # Reset valid and is_random each cycle
+            self.is_random = False
+            self.valid = False
+    
+            # Check if the bit count has reached 127 (since counting starts from 0, 127 means 128 bits)
+            if self.bit_count == 127:
+                # Determine if the sum is within the boundary range
+                self.is_random = -BOUNDRY <= self.sum <= BOUNDRY
+                self.valid = True
+                self.sum = 0  # Reset sum after processing a batch of 128 bits
+    
+            # Increment the bit count, and wrap it around if it reaches 128
+            self.bit_count = (self.bit_count + 1) % TARGET_BITS
+    
+        def get_status(self):
+            return {
+                "is_random": self.is_random,
+                "valid": self.valid,
+                "sum": self.sum,
+                "bit_count": self.bit_count
+            }
 
         monobit_processor = Monobit()
         
