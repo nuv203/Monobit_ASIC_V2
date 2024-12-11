@@ -77,7 +77,7 @@ async def tt_um_monobit (dut):
 
         monobit_processor = Monobit()
         
-        monobit_processor.process_bit(espilon_value % 2)  # Alternating pattern of 1s and 0s
+        monobit_processor.process_bit(epsilon_value % 2)  # Alternating pattern of 1s and 0s
         
         # Retrieve and print the status after some processing
         status = monobit_processor.get_status()
