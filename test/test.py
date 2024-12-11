@@ -6,7 +6,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
 
-@cocotb.taest()
+@cocotb.test()
 async def tt_um_monobit (dut):
     dut._log.info("Start")
 
