@@ -138,7 +138,8 @@ module monobit_core (
       is_random_rsci_idat <= 1'b0;
     end
     else if ( fsm_output[0] ) begin
-      is_random_rsci_idat <= ~((~|sum_sva_2[7:1]) | (~|sum_sva_2[7:2]) | unequal_tmp_1);
+      //is_random_rsci_idat <= ~((~|sum_sva_2[7:1]) | (~|sum_sva_2[7:2]) | unequal_tmp_1);
+      is_random_rsci_idat <= (sum_sva >= -8'd29) && (sum_sva <= 8'd29) && ~unequal_tmp_1;
     end
   end
   always @(posedge clk) begin
