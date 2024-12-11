@@ -86,7 +86,7 @@ async def tt_um_monobit (dut):
         print(f"Is Random: {status['is_random']}, Valid: {status['valid']}, Sum: {status['sum']}, Bit Count: {status['bit_count']}")
 
         is_random_expected = status['is_random'] # Expected output, set as per your design needs
-        valid_expected = status.['valid']      # Expected output, set as per your design needs
+        valid_expected = status['valid']      # Expected output, set as per your design needs
         assert dut.uo_out.value[0] == is_random_expected
         assert dut.uo_out.value[1] == valid_expected
 
