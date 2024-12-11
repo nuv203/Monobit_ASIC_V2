@@ -89,6 +89,6 @@ async def tt_um_monobit (dut):
         assert dut.uo_out.value[1] == valid_expected
 
         # Print output state for debugging
-        dut._log.info(f"Epsilon: {epsilon_value}, Is_Random: {dut.is_random_rsc_dat.value}, Valid: {dut.valid_rsc_dat.value}")
+        dut._log.info(f"Epsilon: {epsilon_value}, Is_Random: {dut.uo_out.value[0]}, Valid: {dut.uo_out.value[1]}")
 
         # Add further checks as needed for complete coverage
