@@ -32,23 +32,41 @@ wire [7:0] uio_oe;
 `endif
 
 
-  // Replace tt_um_example with your module name:
   tt_um_monobit user_project (
-
-   // Include power ports for the Gate Level test:
-   `ifdef GL_TEST
-   .VPWR(VPWR),
-   .VGND(VGND),
-   `endif
-   
-   .ui_in  (ui_in),    // Dedicated inputs
-   .uo_out (uo_out),   // Dedicated outputs
-   .uio_in (uio_in),   // IOs: Input path
-   .uio_out(uio_out),  // IOs: Output path
-   .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
-   .ena    (ena),      // enable - goes high when design is selected
-   .clk    (clk),      // clock
-   .rst_n  (rst_n)     // not reset
+`ifdef GL_TEST
+      .VPWR(VPWR),
+      .VGND(VGND),
+`endif
+      .ui_in (ui_in),     // Dedicated inputs
+      .uo_out(uo_out),    // Dedicated outputs
+      .uio_in(uio_in),    // IOs: Input path
+      .uio_out(uio_out),  // IOs: Output path
+      .uio_oe(uio_oe),    // IOs: Enable path (active high)
+      .ena(ena),          // enable
+      .clk(clk),          // clock
+      .rst(rst)           // reset (active high, changed to match Python testbench)
   );
+
+  // Clock generation
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk;  // 10ns period, 100MHz approx.
+  end
+
+  // Initialize signals
+  initial begin
+    ena   = 0;
+    rst   = 1; // Changed to active high reset
+    ui_in = 8'h00;
+    uio_in = 8'h00;
+
+    // Wait a bit, then release reset
+    #100;
+    rst   = 0; // Deassert reset
+    ena   = 1;
+
+    // The actual stimulus is provided by the cocotb test.py
+    // So we don't drive more signals here. cocotb will drive them.
+  end
 
 endmodule
