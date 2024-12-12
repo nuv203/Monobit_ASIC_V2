@@ -85,17 +85,17 @@ endmodule
 
 
 module monobit_core (
-  clk, rst, is_random_rsc_dat, is_random_triosy_lz, valid_rsc_dat, valid_triosy_lz,
-      epsilon_rsc_dat, epsilon_triosy_lz
+  clk, rst, is_random, is_random_triosy, valid_rsc, valid_triosy,
+      epsilon, epsilon_triosy
 );
   input clk;
   input rst;
-  output is_random_rsc_dat;
-  output is_random_triosy_lz;
-  output valid_rsc_dat;
-  output valid_triosy_lz;
-  input epsilon_rsc_dat;
-  output epsilon_triosy_lz;
+  output is_random;
+  output is_random_triosy;
+  output valid_rsc;
+  output valid_triosy;
+  input epsilon;
+  output epsilon_triosy;
   
   reg is_random_rsci_idat;
   reg valid_rsci_idat;
@@ -114,27 +114,27 @@ module monobit_core (
   wire[7:0] nl_operator_8_true_acc_nl_1;
   ccs_out_v1 #(.rscid(32'sd1), .width(32'sd1)) is_random_rsci (
       .idat(is_random_rsci_idat),
-      .dat(is_random_rsc_dat)
+      .dat(is_random)
     );
   ccs_out_v1 #(.rscid(32'sd2), .width(32'sd1)) valid_rsci (
       .idat(valid_rsci_idat),
-      .dat(valid_rsc_dat)
+      .dat(valid_rsc)
     );
   ccs_in_v1 #(.rscid(32'sd3), .width(32'sd1)) epsilon_rsci (
-      .dat(epsilon_rsc_dat),
+      .dat(epsilon),
       .idat(epsilon_rsci_idat)
     );
   mgc_io_sync_v2 #(.valid(32'sd0)) is_random_triosy_obj (
       .ld(reg_epsilon_triosy_obj_ld_cse),
-      .lz(is_random_triosy_lz)
+      .lz(is_random_triosy)
     );
   mgc_io_sync_v2 #(.valid(32'sd0)) valid_triosy_obj (
       .ld(reg_epsilon_triosy_obj_ld_cse),
-      .lz(valid_triosy_lz)
+      .lz(valid_triosy)
     );
   mgc_io_sync_v2 #(.valid(32'sd0)) epsilon_triosy_obj (
       .ld(reg_epsilon_triosy_obj_ld_cse),
-      .lz(epsilon_triosy_lz)
+      .lz(epsilon_triosy)
     );
   monobit_core_core_fsm monobit_core_core_fsm_inst ( 
       .clk(clk),
@@ -258,26 +258,26 @@ module monobit_core (
 
 
 module monobit (
-  clk, rst, is_random_rsc_dat, is_random_triosy_lz, valid_rsc_dat, valid_triosy_lz,
-      epsilon_rsc_dat, epsilon_triosy_lz
+  clk, rst, is_random, is_random_triosy, valid_rsc, valid_triosy,
+      epsilon, epsilon_triosy
 );
   input clk;
   input rst;
-  output is_random_rsc_dat;
-  output is_random_triosy_lz;
-  output valid_rsc_dat;
-  output valid_triosy_lz;
-  input epsilon_rsc_dat;
-  output epsilon_triosy_lz;
+  output is_random;
+  output is_random_triosy;
+  output valid_rsc;
+  output valid_triosy;
+  input epsilon;
+  output epsilon_triosy;
   monobit_core monobit_core_inst (
       .clk(clk),
       .rst(rst),
-      .is_random_rsc_dat(is_random_rsc_dat),
-      .is_random_triosy_lz(is_random_triosy_lz),
-      .valid_rsc_dat(valid_rsc_dat),
-      .valid_triosy_lz(valid_triosy_lz),
-      .epsilon_rsc_dat(epsilon_rsc_dat),
-      .epsilon_triosy_lz(epsilon_triosy_lz)
+      .is_random(is_random),
+      .is_random_triosy(is_random_triosy),
+      .valid_rsc(valid_rsc),
+      .valid_triosy(valid_triosy),
+      .epsilon(epsilon),
+      .epsilon_triosy(epsilon_triosy)
     );
 endmodule
 
@@ -295,40 +295,40 @@ module tt_um_monobit (
 
   // Monobit signals
   
-  input epsilon_rsc_dat;   
+  input epsilon;   
 
-  output is_random_rsc_dat;  
-  output is_random_triosy_lz;
+  output is_random;  
+  output is_random_triosy;
 
-  output valid_rsc_dat;      
-  output valid_triosy_lz;
+  output valid_rsc;      
+  output valid_triosy;
   
-  output epsilon_triosy_lz;
+  output epsilon_triosy;
 
 
 
-  wire epsilon_rsc_dat = ui_in[0];
+  wire epsilon = ui_in[0];
 
 
   monobit monobit_inst (
       .clk                  (clk),
       .rst                  (~rst_n),               
-      .is_random_rsc_dat    (is_random_rsc_dat),
-      .is_random_triosy_lz  (is_random_triosy_lz),
-      .valid_rsc_dat        (valid_rsc_dat),
-      .valid_triosy_lz      (valid_triosy_lz),
-      .epsilon_rsc_dat      (epsilon_rsc_dat),
-      .epsilon_triosy_lz    (epsilon_triosy_lz)
+      .is_random    (is_random),
+      .is_random_triosy  (is_random_triosy),
+      .valid_rsc        (valid_rsc),
+      .valid_triosy      (valid_triosy),
+      .epsilon      (epsilon),
+      .epsilon_triosy    (epsilon_triosy)
   );
 
-  assign uo_out[0] = is_random_rsc_dat;
-  assign uo_out[1] = valid_rsc_dat;
+  assign uo_out[0] = is_random;
+  assign uo_out[1] = valid_rsc;
 
   assign uo_out[4:2] = 3'b000;
 
-  assign uo_out[5] = is_random_triosy_lz;
-  assign uo_out[6] = valid_triosy_lz;
-  assign uo_out[7] = epsilon_triosy_lz;
+  assign uo_out[5] = is_random_triosy;
+  assign uo_out[6] = valid_triosy;
+  assign uo_out[7] = epsilon_triosy;
 
   
 
