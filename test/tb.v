@@ -56,13 +56,13 @@ wire [7:0] uio_oe;
   // Initialize signals
   initial begin
     ena   = 0;
-    rst   = 1; // Changed to active high reset
+    rst_n   = 1; // Changed to active high reset
     ui_in = 8'h00;
     uio_in = 8'h00;
 
     // Wait a bit, then release reset
     #100;
-    rst   = 0; // Deassert reset
+    rst_n   = 0; // Deassert reset
     ena   = 1;
 
     // The actual stimulus is provided by the cocotb test.py
