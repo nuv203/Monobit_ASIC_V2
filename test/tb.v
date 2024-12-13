@@ -44,7 +44,7 @@ wire [7:0] uio_oe;
       .uio_oe(uio_oe),    // IOs: Enable path (active high)
       .ena(ena),          // enable
       .clk(clk),          // clock
-      .rst(rst)           // reset (active high, changed to match Python testbench)
+     .rst_n(rst_n)           // reset (active high, changed to match Python testbench)
   );
 
   // Clock generation
