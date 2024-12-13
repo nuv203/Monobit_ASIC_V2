@@ -16,6 +16,7 @@ The `tt_um_monobit` module serves as the top-level wrapper for a hardware implem
 ### Input/Output Ports
 
 - `ui_in`: An 8-bit input bus used to configure the test parameters.
+  - 
 - `uo_out`: An 8-bit output bus to report results and status flags.
 - `uio_in` and `uio_out`: Unused in this implementation, set to zero.
 - `ena`, `clk`, and `rst_n`: Enable, clock, and active-low reset signals for the module.
