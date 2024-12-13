@@ -58,12 +58,12 @@ project:
   title:        "Monobit"      # Project title
   author:       "Dennis Du & Rick Gao"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Hi"      # One line description of what your project does
+  description:  "Monobit"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     100000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_monobit"
@@ -73,7 +73,7 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
-    # - "monobit.v"
+    - "monobit.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
@@ -90,12 +90,12 @@ pinout:
   # Outputs
   uo[0]: "is_random_rsc_dat"
   uo[1]: "valid_rsc_dat"
-  uo[2]: "is_random_triosy_lz"
-  uo[3]: "valid_triosy_lz"
-  uo[4]: "epsilon_triosy_lz"
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: "is_random_triosy_lz"
+  uo[6]: "valid_triosy_lz"
+  uo[7]: "epsilon_triosy_lz"
 
   # Bidirectional pins
   uio[0]: ""
@@ -109,3 +109,4 @@ pinout:
 
 # Do not change!
 yaml_version: 6
+
