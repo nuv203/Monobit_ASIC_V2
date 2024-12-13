@@ -47,6 +47,7 @@ Testing was conducted using a Python script, `test.py`, which:
 1. Configures the `tt_um_monobit` module via the `ui_in` bus.
 2. Provides clock and reset signals to initialize and run the module.
 3. Reads the results from the `uo_out` bus to validate the functionality.
+4. Use test.py 
 
 # External hardware
 
