@@ -31,13 +31,13 @@ pinout:
 
   # Outputs
   uo[0]: "is_random"
-  uo[1]: "is_random_triosy_lz"
-  uo[2]: "valid"
-  uo[3]: "valid_triosy_lz"
-  uo[4]: "epsilon_triosy_lz"
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[1]: "valid_rsc"
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: "is_random_triosy"
+  uo[6]: "valid_triosy"
+  uo[7]: "epsilon_triosy"
 
   # Bidirectional pins
   uio[0]: ""
