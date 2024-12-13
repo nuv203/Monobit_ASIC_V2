@@ -1,62 +1,7 @@
-# # Tiny Tapeout project information
-# project:
-#   title:        "monobit"      # Project title
-#   author:       "Niles Peter, Joshua Cho"      # Your name
-#   discord:      "Dabeasthalofan6"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-#   description:  "class"      # One line description of what your project does
-#   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-#   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
-
-#   # How many tiles your design occupies? A single tile is about 167x108 uM. DO NOT CHANGE
-#   tiles: "4x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
-
-#   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-#   top_module:  "tt_um_monobit"
-
-#   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
-#   source_files:
-#     - "project.v"
-
-# # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# pinout:
-#   # Inputs
-#   ui[0]: "epsilon"
-#   ui[1]: ""
-#   ui[2]: ""
-#   ui[3]: ""
-#   ui[4]: ""
-#   ui[5]: ""
-#   ui[6]: ""
-#   ui[7]: ""
-
-#   # Outputs
-#   uo[0]: "is_random"
-#   uo[1]: "valid_rsc"
-#   uo[2]: ""
-#   uo[3]: ""
-#   uo[4]: ""
-#   uo[5]: "is_random_triosy"
-#   uo[6]: "valid_triosy"
-#   uo[7]: "epsilon_triosy"
-
-#   # Bidirectional pins
-#   uio[0]: ""
-#   uio[1]: ""
-#   uio[2]: ""
-#   uio[3]: ""
-#   uio[4]: ""
-#   uio[5]: ""
-#   uio[6]: ""
-#   uio[7]: ""
-
-# # Do not change!
-# yaml_version: 6
-
-
 # Tiny Tapeout project information
 project:
   title:        "Monobit"      # Project title
-  author:       "Dennis Du & Rick Gao"      # Your name
+  author:       "Niles Villaverde & Joshua Cho"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Monobit"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
@@ -77,7 +22,7 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: "epsilon_rsc_dat"
+  ui[0]: "epsilon_rsc"
   ui[1]: ""
   ui[2]: ""
   ui[3]: ""
@@ -87,14 +32,14 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: "is_random_rsc_dat"
-  uo[1]: "valid_rsc_dat"
+  uo[0]: "is_random_rsc"
+  uo[1]: "valid_rsc"
   uo[2]: ""
   uo[3]: ""
   uo[4]: ""
-  uo[5]: "is_random_triosy_lz"
-  uo[6]: "valid_triosy_lz"
-  uo[7]: "epsilon_triosy_lz"
+  uo[5]: "is_random_triosy"
+  uo[6]: "valid_triosy"
+  uo[7]: "epsilon_triosy"
 
   # Bidirectional pins
   uio[0]: ""
